@@ -1,10 +1,5 @@
 /**
  * Holding.java
- * 
- * $Id: $
- * 
- * $Log: $
- * 
  */
 
 /**
@@ -15,5 +10,15 @@
  *
  */
 public abstract class Holding {
+	
+	String name;
+	int value;
+	
+	Holding(String n, int v) {
+		int val = v;
+		String myname = name;
+		this.name = myname;
+		this.value = val;
+	}
 	
 }
