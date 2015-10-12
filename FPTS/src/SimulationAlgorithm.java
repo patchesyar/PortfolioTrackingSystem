@@ -17,6 +17,8 @@ public abstract interface SimulationAlgorithm {
 	 * 
 	 * @param steps - How many steps the algorithm must make
 	 * @param eObj - A given equity object.
+	 * @param type - Refers to the type of time skip, 
+	 *     "D" for days, "M" for months, "Y" for years
 	 */
-	public void simulate(int steps, Equity eObj);
+	public void simulate(int steps, Equity eObj, char type);
 }

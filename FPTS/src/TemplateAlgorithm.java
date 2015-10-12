@@ -9,13 +9,13 @@
  */
 public abstract class TemplateAlgorithm implements SimulationAlgorithm {
 
-	double ValueArray[]; //The value of the equity over time
+	double valueArray[]; //The value of the equity over time
 	
-	TemplateAlgorithm(){
+	public TemplateAlgorithm(){
 		
 	}
 	
 	public double[] getValues(){
-		return ValueArray;
+		return valueArray;
 	}
 }

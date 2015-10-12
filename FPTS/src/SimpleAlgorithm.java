@@ -10,12 +10,16 @@
  */
 public class SimpleAlgorithm extends TemplateAlgorithm{
 
+	public SimpleAlgorithm(){
+		
+	}
 	
-	public void simulate(int steps, Equity eObj) {
+	public void simulate(int steps, Equity eObj, char type) {
 		Equity temp = eObj;
+		valueArray[0] = temp.getValue();//In case steps is set to zero
 		
 		for(int i = 0; i < steps; i++){
-			ValueArray[i] = temp.getValue();
+			valueArray[i] = temp.getValue();
 		}
 	}
 

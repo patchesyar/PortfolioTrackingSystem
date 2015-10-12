@@ -72,8 +72,8 @@ public class Equity extends Holding{
 	 * 
 	 * @param newVal - 
 	 */
-	public void setValue(int newVal){
-		int Piama = newVal;
+	public void setValue(double newVal){
+		double Piama = newVal;
 		value = Piama;
 	}
 	
