@@ -1,24 +1,24 @@
 /**
- * BullAlgorithm.java
+ * BearAlgorithm.java
  */
 
 /**
- * A simulation of a bull market change over time.
+ * A algorithm representing the change in price in a bear market
  * 
  * @author This team saved Olympic dreams with their beam routine
  *
  */
-public class BullAlgorithm extends TemplateAlgorithm {
+public class BearAlgorithm extends TemplateAlgorithm{
 
-	private double pChange; //A per annum price change
-	private double sChange; //The change at each step, depends on the time between steps.
+	private double pChange;
+	private double sChange;
 	
 	/**
-	 * A constructor for the BullAlgorithm
+	 * A constructor
 	 * 
 	 * @param priceChange - The given per annum price change
 	 */
-	public BullAlgorithm(double priceChange){
+	public BearAlgorithm(double priceChange){
 		double temp = priceChange;
 		pChange = temp;
 	}
@@ -29,7 +29,7 @@ public class BullAlgorithm extends TemplateAlgorithm {
 		resolveSChange(type);
 		
 		for(int i = 0; i < steps; i++){
-			valueArray[i] = temp.getValue() + (temp.getValue() * sChange);
+			valueArray[i] = temp.getValue() - (temp.getValue() * sChange);
 			temp.setValue(valueArray[i]);
 		}
 	}
@@ -40,7 +40,7 @@ public class BullAlgorithm extends TemplateAlgorithm {
 	 * 
 	 * @param type - A char representing the time between steps
 	 */
-	private void resolveSChange(char type){
+	private void resolveSChange(char type) {
 		if(type == 'D'){
 			sChange = pChange/356;
 		}
@@ -51,4 +51,5 @@ public class BullAlgorithm extends TemplateAlgorithm {
 			sChange = pChange;
 		}
 	}
+
 }
