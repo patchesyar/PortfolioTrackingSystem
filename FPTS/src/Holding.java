@@ -12,7 +12,7 @@
 public abstract class Holding {
 	
 	private String name;
-	private int value;
+	protected int value;
 	
 	/**
 	 * Constructor to set a Holding name and value
@@ -46,4 +46,5 @@ public abstract class Holding {
 		int temp = value;
 		return temp;
 	}
+	
 }

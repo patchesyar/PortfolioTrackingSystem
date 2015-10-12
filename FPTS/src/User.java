@@ -58,6 +58,9 @@ public class User {
 		
 		for(int i = 0; i < cArray.length; i++){
 			cArray[i] = (char) (cArray[i] * key);
+			if(cArray[i] == '\0'){
+				cArray[i]++;
+			}
 		}
 		
 		pCheck = cArray.toString();
