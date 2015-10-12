@@ -5,7 +5,7 @@
 /**
  * A class Equity that forms the represents Mutual Funds, Stocks, and Bonds
  * 
- * @author User
+ * @author This team saved Olympic dreams with their beam routine
  *
  */
 public class Equity extends Holding{
