@@ -15,7 +15,7 @@ public class BankAccount extends Holding {
 	 * @param n - name
 	 * @param v - value
 	 */
-	public BankAccount(String n, int v) {
+	public BankAccount(String n, double v) {
 		super(n, v);
 	}
 	
@@ -24,7 +24,7 @@ public class BankAccount extends Holding {
 	 * 
 	 * @param amount - The given sum of funds 
 	 */
-	public void deposit(int amount){
+	public void deposit(double amount){
 		value = value - amount;
 	}
 	
@@ -33,7 +33,7 @@ public class BankAccount extends Holding {
 	 * 
 	 * @param amount - The given amount of funds to be withdrawn from the account
 	 */
-	public void withdraw(int amount){
+	public void withdraw(double amount){
 		value = value + amount;
 	}
 }

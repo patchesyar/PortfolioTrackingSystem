@@ -15,7 +15,7 @@ public class CashAccount extends Holding{
 	 * @param n - name
 	 * @param v - value
 	 */
-	public CashAccount(String n, int v) {
+	public CashAccount(String n, double v) {
 		super(n, v);
 		// TODO Auto-generated constructor stub
 	}
@@ -25,7 +25,7 @@ public class CashAccount extends Holding{
 	 * 
 	 * @param amount - The given sum of funds 
 	 */
-	public void deposit(int amount){
+	public void deposit(double amount){
 		value = value - amount;
 	}
 	
@@ -34,7 +34,7 @@ public class CashAccount extends Holding{
 	 * 
 	 * @param amount - The given amount of funds to be withdrawn from the account
 	 */
-	public void withdraw(int amount){
+	public void withdraw(double amount){
 		value = value + amount;
 	}
 

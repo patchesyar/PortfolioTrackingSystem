@@ -14,7 +14,7 @@ public class Portfolio {
 
 	private String associatedID;
 	private ArrayList<Holding> hList;
-	private int totalValue;
+	private double totalValue;
 	
 	/**
 	 * Constructor to create a portfolio, value is initially 0 and hList empty.
@@ -60,8 +60,8 @@ public class Portfolio {
 	 * 
 	 * @return - Total Value of all Holdings in the Portfolio
 	 */
-	public int getValue(){
-		int temp = totalValue;
+	public double getValue(){
+		double temp = totalValue;
 		return temp;
 	}
 	

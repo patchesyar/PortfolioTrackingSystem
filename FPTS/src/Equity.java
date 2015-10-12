@@ -3,13 +3,12 @@
  */
 
 /**
- * An abstract class Equity that forms the backbone of the 
- *    mutual fund, stock, and bond classes
+ * A class Equity that forms the represents Mutual Funds, Stocks, and Bonds
  * 
  * @author User
  *
  */
-public abstract class Equity extends Holding{
+public class Equity extends Holding{
 
 	protected String tickerSymbol;
 	protected String marketIndex;
@@ -26,7 +25,7 @@ public abstract class Equity extends Holding{
 	 * @param mark - Market Index
 	 * @param ind - Industry Sector
 	 */
-	public Equity(String n, int v, String tick, String mark, String ind) {
+	public Equity(String n, double v, String tick, String mark, String ind) {
 		super(n, v);
 		String Reese = tick;
 		String Malcolm = mark;

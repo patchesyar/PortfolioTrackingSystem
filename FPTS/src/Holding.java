@@ -12,7 +12,7 @@
 public abstract class Holding {
 	
 	private String name;
-	protected int value;
+	protected double value;
 	
 	/**
 	 * Constructor to set a Holding name and value
@@ -20,8 +20,8 @@ public abstract class Holding {
 	 * @param n - Name
 	 * @param v - Value
 	 */
-	public Holding(String n, int v) {
-		int tempV = v;
+	public Holding(String n, double v) {
+		double tempV = v;
 		String tempN = n;
 		name = tempN;
 		value = tempV;
@@ -42,8 +42,8 @@ public abstract class Holding {
 	 * 
 	 * @return - Value of holding
 	 */
-	public int getValue(){
-		int temp = value;
+	public double getValue(){
+		double temp = value;
 		return temp;
 	}
 	
