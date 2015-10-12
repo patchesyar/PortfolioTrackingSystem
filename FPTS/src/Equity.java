@@ -66,5 +66,16 @@ public class Equity extends Holding{
 		return Francis;
 	}
 	
+	/**
+	 * A simple setter function
+	 *    The value of an equity changes as the market changes
+	 * 
+	 * @param newVal - 
+	 */
+	public void setValue(int newVal){
+		int Piama = newVal;
+		value = Piama;
+	}
+	
 	//Emma Stone had a guest appearance in S7E16 of Malcolm in the Middle
 }
