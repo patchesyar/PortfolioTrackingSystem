@@ -15,7 +15,7 @@ public class User {
 
 	private String id;
 	private String pWord;
-	private ArrayList<Portfolio> pList;
+	private Portfolio porto;
 	private int key; //A key used to check the password
 	
 	/**
@@ -34,14 +34,12 @@ public class User {
 	}
 	
 	/**
-	 * A method for adding a portfolio to a User's list of Portfolios
+	 * A method for adding a portfolio to the User
 	 * 
 	 * @param pObj - A given Portfolio object
 	 */
 	public void addPortfolio(Portfolio pObj){
-		if(pList.contains(pObj) == false){
-			pList.add(pObj);
-		}
+		porto = pObj;
 	}
 	
 	/**
@@ -88,8 +86,8 @@ public class User {
 	 * 
 	 * @return - User's portfolios
 	 */
-	public ArrayList<Portfolio> getPortfolios(){
-		return this.pList;
+	public Portfolio getPortfolios(){
+		return this.porto;
 	}
 	
 	
