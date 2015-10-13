@@ -1,6 +1,10 @@
+import java.text.SimpleDateFormat;
+
 /**
  * BankAccount.java
  */
+
+import java.util.Calendar;
 
 /**
  * A class representing a bank account.
@@ -10,13 +14,22 @@
  */
 public class BankAccount extends Holding {
 	
+	private Calendar DateCreated = Calendar.getInstance();
+	
 	/**
 	 * 
 	 * @param n - name
 	 * @param v - value
 	 */
-	public BankAccount(String n, double v) {
-		super(n, v);
+	public BankAccount(String Name, double Value, String LitDate) {
+		super(Name, Value);
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("YYYY-MM-DD");
+		try{
+			this.DateCreated.setTime(format1.parse(LitDate));
+		} catch (Exception e){
+			System.out.println("Unable to set Date");
+		}
 	}
 	
 	/**
@@ -24,8 +37,9 @@ public class BankAccount extends Holding {
 	 * 
 	 * @param amount - The given sum of funds 
 	 */
-	public void deposit(double amount){
-		value = value - amount;
+	
+	public void deposit(double Amount){
+		super.addToValue(Amount);
 	}
 	
 	/**
@@ -33,7 +47,8 @@ public class BankAccount extends Holding {
 	 * 
 	 * @param amount - The given amount of funds to be withdrawn from the account
 	 */
-	public void withdraw(double amount){
-		value = value + amount;
+	
+	public void withdraw(double Amount){
+		super.takeFromValue(Amount);
 	}
 }

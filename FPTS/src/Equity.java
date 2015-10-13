@@ -10,9 +10,11 @@
  */
 public class Equity extends Holding{
 
-	protected String tickerSymbol;
-	protected String marketIndex;
-	protected String industrySector;
+	private String tickerSymbol;
+	private String marketIndex;
+	private String industrySector;
+	private int NumberOfShares;
+	
 	
 	/**
 	 * An Equity has three pieces of information a Holding does not have
@@ -27,13 +29,11 @@ public class Equity extends Holding{
 	 */
 	public Equity(String n, double v, String tick, String mark, String ind) {
 		super(n, v);
-		String Reese = tick;
-		String Malcolm = mark;
-		String Dewey = ind;
 		
-		tickerSymbol = Reese;
-		marketIndex = Malcolm;
-		industrySector = Dewey;
+		this.tickerSymbol = tick;
+		this.marketIndex = mark;
+		this.industrySector = ind;
+		
 	}
 
 	/**
@@ -42,8 +42,7 @@ public class Equity extends Holding{
 	 * @return - Ticker symbol
 	 */
 	public String getTicker(){
-		String Hal = tickerSymbol;
-		return Hal;
+		return this.tickerSymbol;
 	}
 	
 	/**
@@ -52,8 +51,7 @@ public class Equity extends Holding{
 	 * @return - Market index
 	 */
 	public String getIndex(){
-		String Lois = marketIndex;
-		return Lois;
+		return this.marketIndex;
 	}
 	
 	/**
@@ -62,8 +60,7 @@ public class Equity extends Holding{
 	 * @return - Industry sector
 	 */
 	public String getSector(){
-		String Francis = industrySector;
-		return Francis;
+		return this.industrySector;
 	}
 	
 	/**
@@ -73,9 +70,12 @@ public class Equity extends Holding{
 	 * @param newVal - 
 	 */
 	public void setValue(double newVal){
-		double Piama = newVal;
-		value = Piama;
+		super.setValue(newVal);
 	}
 	
-	//Emma Stone had a guest appearance in S7E16 of Malcolm in the Middle
+	public double getTotalValue(){
+		return (this.NumberOfShares * super.getValue());
+	}
+	
+	
 }

@@ -11,8 +11,8 @@
  */
 public abstract class Holding {
 	
-	private String name;
-	protected double value;
+	private String Name;
+	private double Value;
 	
 	/**
 	 * Constructor to set a Holding name and value
@@ -20,11 +20,9 @@ public abstract class Holding {
 	 * @param n - Name
 	 * @param v - Value
 	 */
-	public Holding(String n, double v) {
-		double tempV = v;
-		String tempN = n;
-		name = tempN;
-		value = tempV;
+	public Holding(String Name, double Value) {
+		this.Name = Name;
+		this.Value = Value;
 	}
 	
 	/**
@@ -33,8 +31,7 @@ public abstract class Holding {
 	 * @return - Name of the Holding
 	 */
 	public String getName(){
-		String temp = name;
-		return temp;
+		return this.Name;
 	}
 	
 	/**
@@ -43,8 +40,19 @@ public abstract class Holding {
 	 * @return - Value of holding
 	 */
 	public double getValue(){
-		double temp = value;
-		return temp;
+		return this.Value;
+	}
+	
+	public void setValue(double Value){
+		this.Value = Value;
+	}
+	
+	public void addToValue(double Value){
+		this.Value += Value;
+	}
+	
+	public void takeFromValue(double Value){
+		this.Value -= Value;
 	}
 	
 }
