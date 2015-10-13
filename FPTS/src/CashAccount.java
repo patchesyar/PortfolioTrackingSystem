@@ -51,5 +51,16 @@ public class CashAccount extends Holding{
 	public void withdraw(double Amount){
 		super.takeFromValue(Amount);
 	}
+	
+	public String getDateCreatedStr(){
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String formatted = format1.format(this.DateCreated.getTime());
+		return formatted;
+	}
+	
+	@Override
+	public String log(){
+		return "HOLDING," + "MMAccount" + ",\"" + super.getName() + "\"," + super.getValue() + getDateCreatedStr();
+	}
 
 }
