@@ -55,4 +55,8 @@ public abstract class Holding {
 		this.Value -= Value;
 	}
 	
+	public String log(){
+		return this.Name + this.Value;
+	}
+	
 }
