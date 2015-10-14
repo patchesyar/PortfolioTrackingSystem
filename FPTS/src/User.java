@@ -14,7 +14,7 @@ public class User {
 
 	private String id;
 	private String pWord;
-	private Portfolio porto;
+	private Portfolio porto = null;
 	private int key; //A key used to check the password
 	
 	/**
