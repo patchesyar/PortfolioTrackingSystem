@@ -61,7 +61,7 @@ public class User {
 		}
 		
 		pCheck = cArray.toString();
-		if(pCheck == pWord){
+		if(pCheck.equals(pWord)){
 			ret = true;	
 		}
 		else{
