@@ -22,6 +22,7 @@ public class CashAccount extends Holding{
 	 */
 	public CashAccount(String Name, double Value, String LitDate) {
 		super(Name, Value);
+		this.type = 'C';
 		
 		
 		SimpleDateFormat format1 = new SimpleDateFormat("YYYY-MM-DD");

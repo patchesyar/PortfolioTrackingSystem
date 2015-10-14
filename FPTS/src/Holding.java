@@ -13,6 +13,7 @@ public abstract class Holding {
 	
 	private String Name;
 	private double Value;
+	protected char type;
 	
 	/**
 	 * Constructor to set a Holding name and value
@@ -57,6 +58,10 @@ public abstract class Holding {
 	
 	public String log(){
 		return this.Name + this.Value;
+	}
+
+	public char getType() {
+		return this.type;
 	}
 	
 }

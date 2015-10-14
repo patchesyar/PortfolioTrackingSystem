@@ -10,7 +10,7 @@
  */
 public class Equity extends Holding{
 
-	private String Type;
+	private String equityType;
 	private String tickerSymbol;
 	private String marketIndex;
 	private String industrySector;
@@ -31,11 +31,12 @@ public class Equity extends Holding{
 	 */
 	public Equity(String n, double v, String tick, String mark, String ind, String Type) {
 		super(n, v);
+		this.type = 'E';
 		
 		this.tickerSymbol = tick;
 		this.marketIndex = mark;
 		this.industrySector = ind;
-		this.Type = Type;
+		this.equityType = Type;
 		
 	}
 
@@ -83,7 +84,7 @@ public class Equity extends Holding{
 	
 	@Override
 	public String log(){
-		return "HOLDING," + this.Type + ",\"" + this.tickerSymbol + "\"," + this.NumberOfShares;
+		return "HOLDING," + this.equityType + ",\"" + this.tickerSymbol + "\"," + this.NumberOfShares;
 	}
 	
 }

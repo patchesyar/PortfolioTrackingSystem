@@ -23,6 +23,7 @@ public class BankAccount extends Holding {
 	 */
 	public BankAccount(String Name, double Value, String LitDate) {
 		super(Name, Value);
+		this.type = 'B';
 		
 		SimpleDateFormat format1 = new SimpleDateFormat("YYYY-MM-DD");
 		try{
