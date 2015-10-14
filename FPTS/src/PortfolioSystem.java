@@ -37,13 +37,14 @@ public class PortfolioSystem {
 		sector.add("HEALTH CARE");
 	}
 	
+
 	/**
-	 * Imports a Portfolio into the system
+	 * Import portfolio information from a file
 	 * 
-	 * @param toP
-	 * @param fromP
+	 * @param toP - The portfolio to import information to
+	 * @param f - A file that holds information
 	 */
-	public void importPortfolio(Portfolio toP, File f, TrackingSystem tSys){
+	public void importPortfolio(Portfolio toP, File f){
 		BufferedReader reader = null;
 		SimpleDateFormat dateF = new SimpleDateFormat("YYYY-MM-DD");
 		Date date = new Date();
