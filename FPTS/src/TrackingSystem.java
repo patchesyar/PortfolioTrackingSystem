@@ -43,7 +43,9 @@ public class TrackingSystem {
 	 * @param eIn - new equity
 	 */
 	public void addEquity(Equity eIn){
-		eList.add(eIn);
+		if(eList.contains(eIn) != true){
+			eList.add(eIn);
+		}
 	}
 	
 	/**

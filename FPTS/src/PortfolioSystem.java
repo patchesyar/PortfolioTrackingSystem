@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,13 +19,22 @@ import java.util.Date;
 /**
  * Handles important functions relevant to portfolio systems.
  * 
- * @author User
+ * @author This team saved Olympic dreams with their beam routine
  *
  */
 public class PortfolioSystem {
 
+	ArrayList<String> indices; //An array of known market indices
+	ArrayList<String> sector; //An array of known market sectors
+	
 	public PortfolioSystem(){
+		indices.add("DOW");
+		indices.add("NASDAQ100");
 		
+		sector.add("TECHNOLOGY");
+		sector.add("FINANCE");
+		sector.add("TRANSPORTATION");
+		sector.add("HEALTH CARE");
 	}
 	
 	/**
@@ -35,10 +43,18 @@ public class PortfolioSystem {
 	 * @param toP
 	 * @param fromP
 	 */
-	public void ImportPortfolio(Portfolio toP, File f){
+	public void importPortfolio(Portfolio toP, File f, TrackingSystem tSys){
 		BufferedReader reader = null;
 		SimpleDateFormat dateF = new SimpleDateFormat("YYYY-MM-DD");
 		Date date = new Date();
+		
+		//Equity variables
+		String n;
+        double v;
+        String tick;
+        String mark = null;
+        String ind = null;
+        String type = "Stock";
 		
 		final String DELIMITER = ",";
 		try
@@ -54,20 +70,51 @@ public class PortfolioSystem {
                 String[] tokens = line.split(DELIMITER);
                 
                 //create Holding from the tokens
+                //BankAccounts
                 if(tokens[0].equals("B")){
                 	BankAccount b = new BankAccount(tokens[1], 
                 			Double.parseDouble(tokens[2]),
                 			dateF.format(date));
                 	toP.addHoldings(b);
                 }
+                
+                //CashAccounts
                 if(tokens[0].equals("C")){
                 	CashAccount c = new CashAccount(tokens[1], 
                 			Double.parseDouble(tokens[2]),
                 			dateF.format(date));
                 	toP.addHoldings(c);
                 }
+                
+                //Equities
                 if(tokens[0].equals("E")){
-                	//To implement using importEquity function
+                	tick = tokens[0];
+                	n = tokens[1];
+                	v = Double.parseDouble(tokens[2]);
+                	if(indices.contains(tokens[3])){
+                    	mark = tokens[3];
+                    }
+                    if(sector.contains(tokens[3])){
+                    	ind = tokens[3];
+                    }
+                    if(tokens[4] != null){
+                    	if(indices.contains(tokens[4])){
+                        	mark = tokens[4];
+                        }
+                        if(sector.contains(tokens[4])){
+                        	ind = tokens[4];
+                        }
+                    }
+                    
+                    Equity e = new Equity(n, v, tick, mark, ind, type);
+                    toP.addHoldings(e);
+                    
+                    tick = null;
+                    v = 0;
+                    n = null;
+                    mark = null;
+                    ind = null;
+                    
                 }
             }
         }
@@ -89,7 +136,7 @@ public class PortfolioSystem {
 	 * 
 	 * @param p - The portfolio
 	 */
-	public void ExportPortfolio(Portfolio p){
+	public void exportPortfolio(Portfolio p){
 		
 		ArrayList<Holding> hList = p.getHoldings();
 		
@@ -112,8 +159,13 @@ public class PortfolioSystem {
 			    		writer.write("E," + h.getName() + ",");
 			    		writer.write(Double.toString(h.getValue()));
 			    		writer.write(",");
-			    		writer.write(((Equity) h).getIndex() + ",");
-			    		writer.write(((Equity) h).getSector() + "\n");
+			    		if(((Equity) h).getIndex() != null){
+			    			writer.write(((Equity) h).getIndex() + ",");
+			    		}
+			    		if(((Equity) h).getSector() != null){
+			    			writer.write(((Equity) h).getSector());
+			    		}
+			    		writer.write("\n");
 			    	}
 			    }
 	    } catch (UnsupportedEncodingException e) {
