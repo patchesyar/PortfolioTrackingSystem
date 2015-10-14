@@ -15,6 +15,8 @@ public class Portfolio {
 	private String associatedID;
 	private ArrayList<Holding> hList;
 	private double totalValue;
+	private Logger log;
+	
 	
 	/**
 	 * Constructor to create a portfolio, value is initially 0 and hList empty.
@@ -25,6 +27,7 @@ public class Portfolio {
 		String tempS = uObj.getId();
 		totalValue = 0;
 		associatedID = tempS;
+		this.log = new Logger(associatedID);
 	}
 	/**
 	 * A simple getter function
@@ -33,8 +36,11 @@ public class Portfolio {
 	 */
 	public void addHoldings(Holding hObj){
 		hList.add(hObj);
+		this.log.addLog(hObj.log());
 		totalValue += hObj.getValue();
 	}
+	
+	
 	
 	/**
 	 * A simple getter function
@@ -60,9 +66,18 @@ public class Portfolio {
 	 * 
 	 * @return - Total Value of all Holdings in the Portfolio
 	 */
+	
+	private void updateTotalValue(){
+		double tempValue = 0;
+		for(Holding a : this.hList){
+			tempValue += a.getValue();
+		}
+		this.totalValue = tempValue;
+	}
+	
 	public double getValue(){
-		double temp = totalValue;
-		return temp;
+		updateTotalValue();
+		return this.totalValue;
 	}
 	
 	

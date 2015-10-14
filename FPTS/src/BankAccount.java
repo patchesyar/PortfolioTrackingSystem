@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class BankAccount extends Holding {
 	
 	private Calendar DateCreated = Calendar.getInstance();
-	
+
 	/**
 	 * 
 	 * @param n - name
@@ -30,6 +30,8 @@ public class BankAccount extends Holding {
 		} catch (Exception e){
 			System.out.println("Unable to set Date");
 		}
+		
+		
 	}
 	
 	/**
