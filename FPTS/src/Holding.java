@@ -64,4 +64,11 @@ public abstract class Holding {
 		return this.type;
 	}
 	
+	/**
+	 * Equities have different functionality from other holdings
+	 *     and must have a way to easily distinguish them
+	 * 
+	 * @return - True if the object is an equity
+	 */
+	public abstract boolean isEquity();
 }

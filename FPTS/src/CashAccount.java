@@ -64,4 +64,10 @@ public class CashAccount extends Holding{
 		return "HOLDING," + "MMAccount" + ",\"" + super.getName() + "\"," + super.getValue() + getDateCreatedStr();
 	}
 
+	@Override
+	public boolean isEquity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -181,4 +181,32 @@ public class PortfolioSystem {
 	    	e.printStackTrace();
 	    }
 	}
+	
+
+	/**
+	 * Simulates a portfolios equities over time
+	 * 
+	 * @param p - The portfolio
+	 * @param steps - Time steps
+	 * @param time - What the time steps are(Years, Months or Days)
+	 * @param tA - An algorithm object
+	 * @return - An array of double arrays, representing the 
+	 *     values of the equities over time in the order they appear
+	 *     in the portfolio
+	 */
+	public double[][] simulate(Portfolio p, int steps, char time, TemplateAlgorithm tA){
+		double[][] ret = null;
+		int aPos = 0;
+		ArrayList<Holding> hList = p.getHoldings();
+		
+		for(int i = 0; i < hList.size(); i++){
+			if(hList.get(i).isEquity()){
+				tA.simulate(steps, (Equity) hList.get(i), time);
+				ret[aPos] = tA.getValues();
+				aPos++;
+			}
+		}
+		
+		return ret;
+	}
 }

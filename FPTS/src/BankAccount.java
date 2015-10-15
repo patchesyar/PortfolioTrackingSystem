@@ -65,5 +65,11 @@ public class BankAccount extends Holding {
 	public String log(){
 		return "HOLDING," + "BAccount" + ",\"" + super.getName() + "\"," + super.getValue() + getDateCreatedStr();
 	}
+
+	@Override
+	public boolean isEquity() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

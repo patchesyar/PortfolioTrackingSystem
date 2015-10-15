@@ -86,5 +86,11 @@ public class Equity extends Holding{
 	public String log(){
 		return "HOLDING," + this.equityType + ",\"" + this.tickerSymbol + "\"," + this.NumberOfShares;
 	}
+
+	@Override
+	public boolean isEquity() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 }
