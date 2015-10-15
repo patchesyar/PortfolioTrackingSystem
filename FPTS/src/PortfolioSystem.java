@@ -17,7 +17,8 @@ import java.util.Date;
  */
 
 /**
- * Handles important functions relevant to portfolio systems.
+ * Handles important functions relevant to portfolio systems. 
+ *    Such as importing, exporting, buying holdings and simulations
  * 
  * @author This team saved Olympic dreams with their beam routine
  *
