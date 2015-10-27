@@ -7,8 +7,8 @@ public class State{
 	 * If we want to keep track of other things just pass them as arguments
 	 */
 	
-	public State (Portfolio portfolio, User user){
-		this.portfolio = portfolio;
+	public State (User user){
+		this.portfolio = user.getPortfolios();
 		this.user = user;
 	}
 	
