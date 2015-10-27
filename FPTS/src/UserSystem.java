@@ -10,7 +10,7 @@
  */
 public class UserSystem {
 	private boolean authenticatedSession = false; 
-	private User activeUser = null;
+	private static User activeUser = null;
 	
 	public UserSystem(){
 		
@@ -49,7 +49,7 @@ public class UserSystem {
 	 * 
 	 * @return 
 	 */
-	public User getActiveUser(){
+	public static User getActiveUser(){
 		return activeUser;
 	}
 	

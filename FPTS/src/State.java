@@ -21,7 +21,7 @@ public class State{
 		
 	}
 	
-	public void  undoState(Portfolio target){
-		portfolioUndo(target);
+	public void  undoState(User target){
+		portfolioUndo(target.getPortfolios());
 	}
 }

@@ -4,6 +4,7 @@ public class UNDO{
 	
 	Stack<State> UndoStack = new Stack<State>();
 	
+	
 	public UNDO (){}
 	
 	public void push (State state){
@@ -12,7 +13,9 @@ public class UNDO{
 	
 	public void undoState(){
 		//Modify to use current user
-		this.UndoStack.pop().undoState(null);
+		if (this.UndoStack.peek() != null){
+			this.UndoStack.pop().undoState(UserSystem.getActiveUser());
+		}
 	}
 	
 	
