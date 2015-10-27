@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Portfolio {
 
+
+
 	private String associatedID;
 	private ArrayList<Holding> hList;
 	private double totalValue;
@@ -80,5 +82,36 @@ public class Portfolio {
 		return this.totalValue;
 	}
 	
+	
+	
+	/*
+	 * Getter and Setter functions, used uniquely by the Undo/Redo
+	 */
+	
+	public void setAssociatedID(String associatedID) {
+		this.associatedID = associatedID;
+	}
+	public void sethList(ArrayList<Holding> hList) {
+		this.hList = hList;
+	}
+	public void setTotalValue(double totalValue) {
+		this.totalValue = totalValue;
+	}
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+	
+	public String getAssociatedID() {
+		return associatedID;
+	}
+	public ArrayList<Holding> gethList() {
+		return hList;
+	}
+	public double getTotalValue() {
+		return totalValue;
+	}
+	public Logger getLog() {
+		return log;
+	}
 	
 }
