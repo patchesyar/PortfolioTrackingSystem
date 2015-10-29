@@ -50,7 +50,12 @@ public class CashAccount extends Holding{
 	 */
 	
 	public void withdraw(double Amount){
+		if(Amount>super.getValue()){
+                        System.out.println("Not enough funds");
+                }
+                else{
 		super.takeFromValue(Amount);
+		    }
 	}
 	
 	public String getDateCreatedStr(){

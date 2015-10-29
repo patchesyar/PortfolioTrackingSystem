@@ -82,8 +82,49 @@ public class Portfolio {
 		return this.totalValue;
 	}
 	
+	/*
+	 * Functions for Buying and Selling Equities	
+         */
+
+	public void buyEquity(TrackingSystem tSys, String tickerSymbol, int amount){
+		Equity e = (new Finder()).findEquityByTicker(tSys, tickersymbol);
+		int total = amount * e.getValue() ;
+		Holding bankAccount ;
+		for(int x=0; x<this.hlist.size(); x++){
+			if(this.hlist.get(x).getType()=='B'){
+				bankAccount = this.hlist.get(x) ;
+			}
+		}
+		if(bankAccount == null){
+			System.out.println("Unable to find bank account") ;
+			return ;
+		}else if(total > bankAccount.getValue()){
+			System.out.println("Insufficient funds") ;
+			return ;
+		}
+		//By this point, you have a bank account with enough funds.
+		bankAccount.takeFromValue(total) ;
+		for(int x=0; x<amount; x++){
+			this.addHoldings(e) ;
+		}
+		this.updateTotalValue() ;
+
+	}
 	
-	
+	/*public void sellEquity(TrackingSystem tSys, String tickerSymbol,int amount){
+		Equity e = (new Finder()).findEquityByTicker(tSys, tickerSymbol) ;
+		int count_equities = 0 ;
+		for(int x=0; x<this.hList.size(); x++){
+			if(this.hList.get(x).getName().equals(e.getName())){
+				count_equities++ ;
+			}
+		}
+		if(count_equities < amount){
+			System.out.println("You do not have enough equities to do that.") ;
+		}
+		int total_value = amount * e.getValue() ;
+	}
+	*/
 	/*
 	 * Getter and Setter functions, used uniquely by the Undo/Redo
 	 */
