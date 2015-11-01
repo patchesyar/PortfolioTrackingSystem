@@ -87,12 +87,12 @@ public class Portfolio {
          */
 
 	public void buyEquity(TrackingSystem tSys, String tickerSymbol, int amount){
-		Equity e = (new Finder()).findEquityByTicker(tSys, tickersymbol);
-		int total = amount * e.getValue() ;
-		Holding bankAccount ;
-		for(int x=0; x<this.hlist.size(); x++){
-			if(this.hlist.get(x).getType()=='B'){
-				bankAccount = this.hlist.get(x) ;
+		Equity e = (new Finder()).findEquityByTicker(tSys, tickerSymbol);
+		double total = amount * e.getValue() ;
+		Holding bankAccount = null;
+		for(int x=0; x < this.hList.size(); x++){
+			if(this.hList.get(x).getType()=='B'){
+				bankAccount = this.hList.get(x) ;
 			}
 		}
 		if(bankAccount == null){

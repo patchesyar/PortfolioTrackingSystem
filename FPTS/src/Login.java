@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * newUser.java
+ * Login.java
  */
 
 

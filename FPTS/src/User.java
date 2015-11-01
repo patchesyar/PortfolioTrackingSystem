@@ -1,4 +1,5 @@
 import java.lang.String;
+import java.util.ArrayList;
 
 /**
  * User.java
@@ -16,6 +17,7 @@ public class User {
 	private String pWord;
 	private Portfolio porto = null;
 	private int key; //A key used to check the password
+	private ArrayList<Equity> watchList;
 	
 	/**
 	 * A constructor for the User class
@@ -113,4 +115,33 @@ public class User {
 		return ret;
 	}
 	
+	/**
+	 * Adds an equity to the watchlist.
+	 * 
+	 * @param e - The equity
+	 */
+	public void addToWatchList(Equity e){
+		watchList.add(e);
+	}
+	
+	/**
+	 * Removes an equity from the watchlist.
+	 * 
+	 * @param e - The equity
+	 */
+	public void removeFromWatchList(Equity e){
+		if(watchList.contains(e)){
+		    watchList.remove(e);	
+		}
+	}
+	
+	/**
+	 * Gets the watchList 
+	 * 
+	 * @return - this.watchList
+	 */
+	public ArrayList<Equity> getWatchList(){
+		ArrayList<Equity> ret = watchList;
+		return ret;
+	}
 }
