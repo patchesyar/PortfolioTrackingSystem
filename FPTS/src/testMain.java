@@ -8,7 +8,7 @@ public class testMain {
 		// TODO Auto-generated method stub
 
 		
-		TransactionView buy = new TransactionView();
+		SellView buy = new SellView();
 		while(true){
 			
 		}

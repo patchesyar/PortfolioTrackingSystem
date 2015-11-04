@@ -6,20 +6,18 @@ import java.util.*;
 
 
 
-public class TransactionView extends JFrame{
+public class SellView extends JFrame{
 
-	JButton buyButton;
 	JButton sellButton;
 	JPanel transactionPanel;
 	JPanel buttonPanel;
-	JComboBox dropDown;
+	JComboBox<String> dropDown;
 	
-	User currentUser = UserSystem.getActiveUser();
-	Portfolio currentPortfolio = this.currentUser.getPortfolios();
+//	User currentUser = UserSystem.getActiveUser();
+	Portfolio currentPortfolio = getDummyPortfolio();
 	
 	
-	public TransactionView(){
-		buyButton = new JButton("Buy");
+	public SellView(){
 		sellButton = new JButton("Sell");
 	    transactionPanel = new JPanel();
 	    buttonPanel = new JPanel();
@@ -27,13 +25,28 @@ public class TransactionView extends JFrame{
 	    buttonPanel.setLayout(new FlowLayout());
 	    transactionPanel.setLayout(new BorderLayout());
 	    
-	    buttonPanel.add(buyButton);
 	    buttonPanel.add(sellButton);
 	    
 	    transactionPanel.add(buttonPanel, BorderLayout.SOUTH);
 	    
-	       
+	    ArrayList<Holding> holdingList = currentPortfolio.getHoldings();
 	    
+	    int equitySize = holdingList.size();
+	    int counter = 0;
+	    
+	    String[] equities = new String[equitySize];
+	     
+	    
+	    for (Holding h : holdingList){
+	    	if(h.isEquity()){
+	    		equities[counter] = h.getName();
+	    		counter++;
+	    	}
+	    }
+	    
+	    dropDown = new JComboBox<String>(equities);
+	    
+	    transactionPanel.add(dropDown, BorderLayout.CENTER);
 	    
 	    
 	    
@@ -51,5 +64,24 @@ public class TransactionView extends JFrame{
 	    this.setVisible(true);
 	}
 	
+	private Portfolio getDummyPortfolio(){
+		
+		User dummyUser = new User("Adrian", "Password");
+		Portfolio dummyPortfolio = new Portfolio(dummyUser);
+		Equity A = new Equity("A1", 1, "A", "A", "A", "A");
+		Equity B = new Equity("A2", 2, "A", "A", "A", "A");
+		Equity C = new Equity("A3", 3, "A", "A", "A", "A");
+		Equity D = new Equity("A4", 4, "A", "A", "A", "A");
+		Equity E = new Equity("A5", 5, "A", "A", "A", "A");
+		
+		dummyPortfolio.addHoldings(A);
+		dummyPortfolio.addHoldings(B);
+		dummyPortfolio.addHoldings(C);
+		dummyPortfolio.addHoldings(D);
+		dummyPortfolio.addHoldings(E);
+		
+		return dummyPortfolio;
+		
+	}
 	
 }

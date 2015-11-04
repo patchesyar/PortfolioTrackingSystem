@@ -82,6 +82,10 @@ public class Equity extends Holding{
 	}
 	
 	
+	public String toString(){
+		return this.tickerSymbol + "........" + super.getValue() + "........" + this.NumberOfShares;
+	}
+	
 	@Override
 	public String log(){
 		return "HOLDING," + this.equityType + ",\"" + this.tickerSymbol + "\"," + this.NumberOfShares;

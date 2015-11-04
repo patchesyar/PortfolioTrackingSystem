@@ -15,7 +15,7 @@ public class Portfolio {
 
 
 	private String associatedID;
-	private ArrayList<Holding> hList;
+	private ArrayList<Holding> hList = new ArrayList<Holding>();
 	private double totalValue;
 	private Logger log;
 	
