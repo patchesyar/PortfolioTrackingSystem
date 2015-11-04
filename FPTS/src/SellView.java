@@ -11,19 +11,48 @@ public class SellView extends JFrame{
 	JButton sellButton;
 	JPanel transactionPanel;
 	JPanel buttonPanel;
+	JPanel centerPanel;
 	JComboBox<String> dropDown;
+	JTextField soldAmount; 
+	Portfolio currentPortfolio;
+	User currentUser = UserSystem.getActiveUser();
 	
-//	User currentUser = UserSystem.getActiveUser();
-	Portfolio currentPortfolio = getDummyPortfolio();
+	
 	
 	
 	public SellView(){
+		
+		if (currentUser == null){
+			currentPortfolio = getDummyPortfolio();
+		} else {
+			currentPortfolio = currentUser.getPortfolios();
+		}
+		
 		sellButton = new JButton("Sell");
 	    transactionPanel = new JPanel();
 	    buttonPanel = new JPanel();
+	    soldAmount = new JTextField();
+	    centerPanel = new JPanel();
 	    
 	    buttonPanel.setLayout(new FlowLayout());
+	    centerPanel.setLayout(new GridLayout(0,1));
 	    transactionPanel.setLayout(new BorderLayout());
+	    
+	    sellButton.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e){
+	    		
+	    		int amount;
+	    		
+	    		if (soldAmount.getText().equals("")){
+	    			amount = 0;
+	    		} else {
+	    			amount = Integer.parseInt(soldAmount.getText());
+	    		}
+	    		String ticker = dropDown.getSelectedItem().toString();
+	    		System.out.println(ticker);
+	    	}
+	    });
+	    
 	    
 	    buttonPanel.add(sellButton);
 	    
@@ -46,8 +75,10 @@ public class SellView extends JFrame{
 	    
 	    dropDown = new JComboBox<String>(equities);
 	    
-	    transactionPanel.add(dropDown, BorderLayout.CENTER);
+	    centerPanel.add(dropDown);
+	    centerPanel.add(soldAmount);
 	    
+	    transactionPanel.add(centerPanel, BorderLayout.CENTER);
 	    
 	    
 	    setJFrame();

@@ -63,7 +63,7 @@ public class UserLogin extends JFrame {
                     try {
                         File file = new File("userList.txt");
                         br = new BufferedReader(new FileReader(file));
-                        Scanner scan = new Scanner(file);;
+                        Scanner scan = new Scanner(file);
                         String line = null;
                         FileWriter filewrite = new FileWriter(file, true);
 
