@@ -8,11 +8,10 @@ import java.util.*;
 public class UserLogin extends JFrame {
 
 	JButton loginB;
+        JButton createNew;
 	JPanel loginPanel;
 	JTextField userName;
 	JTextField userPass;
-	
-	JButton newUser;
 	JLabel userLabel;
 	JLabel passLabel;
         BufferedReader br = null;
@@ -23,23 +22,30 @@ public class UserLogin extends JFrame {
 		
 		
             loginB = new JButton("Login");
+            createNew = new JButton("Create New");
             loginPanel = new JPanel();
             userName = new JTextField(15);
 	    userPass = new JPasswordField(15);
-	    newUser = new JButton("Setup New User");
 	    userLabel = new JLabel("Username");
 	    passLabel = new JLabel("Password");
 	    
 	    setSize(300,200);
 	    setLocation(500,300);
 	    loginPanel.setLayout(null);
+            
+            userName.setBounds(70,30,150,20);
+            userPass.setBounds(70,65,150,20);
+            loginB.setBounds(100,100,120,20);
+            userLabel.setBounds(5,28,80,20);
+            passLabel.setBounds(5,63,80,20);
+            createNew.setBounds(100,120,120,20);
 	    
 	    loginPanel.add(loginB);
 	    loginPanel.add(userName);
 	    loginPanel.add(userPass);
-	    loginPanel.add(newUser);
 	    loginPanel.add(userLabel);
 	    loginPanel.add(passLabel);
+            loginPanel.add(createNew);
 	    
 	    getContentPane().add(loginPanel);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +69,7 @@ public class UserLogin extends JFrame {
                     try {
                         File file = new File("userList.txt");
                         br = new BufferedReader(new FileReader(file));
-                        Scanner scan = new Scanner(file);
+                        Scanner scan = new Scanner(file);;
                         String line = null;
                         FileWriter filewrite = new FileWriter(file, true);
 
@@ -73,14 +79,15 @@ public class UserLogin extends JFrame {
                         String userP = userPass.getText();
 
 
-                       while((line = br.readLine()) != null){
-                            String[] users = line.split(splitOn);
-                            usertxt = users[1];
-                            passtxt = users[2];
-                        }
+                        while (scan.hasNext()) {
+                            usertxt = scan.nextLine();
+                            passtxt = scan.nextLine();
+
+                        } 
         
                         if(userN.equals(usertxt) && userP.equals(userP)){
-                            //set to main menu GUI
+                            EquityGUI u = new EquityGUI();
+                            u.setVisible( true );
                             dispose();
                         }
                         else if (userN.equals("") || userP.equals("")){
@@ -100,9 +107,10 @@ public class UserLogin extends JFrame {
             }
         });
                         
-    newUser.addActionListener(new ActionListener(){
+    createNew.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
-        Login user = new Login();
+        Login L = new Login();
+        L.setVisible( true );
         dispose();
 
       }
