@@ -1,0 +1,81 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
+public class equityUpdater {
+	private ArrayList<Equity> equityList;
+	
+	/**
+	 * Constructor- creates an equityUpdater to update equities with their new prices 
+	 * @param equityList- a list of equities to update
+	 */
+	public equityUpdater(ArrayList<Equity> equityList) {
+		this.equityList=equityList;
+	}
+	
+	/**
+	 * setEquitiesList allows you to change the set of equities contained within the equityUpdater
+	 * @param newEquities- the new list of Equities
+	 */
+	public void setEquitiesList(ArrayList<Equity> newEquities){
+		this.equityList=newEquities;
+	}
+	
+	/**
+	 * updateAllEquities updates the ask price of all the Equities within the equityUpdater
+	 * @return the list of Equities after their prices have been updated
+	 */
+	public ArrayList<Equity> updateAllEquities(){
+		for (Equity e: this.equityList){
+			try {
+				this.updateEquity(e);
+			}
+			catch (IOException e1) {} //if no data for the stock is found, do not update
+		}
+		return this.equityList;
+	}
+
+	/**
+	 * updateEquity will update the ask price of a single Equity
+	 * @param e the equity to update 
+	 * @return The same equity but with the ask price updated
+	 * @throws IOException thrown if the database query fails
+	 */
+	private Equity updateEquity(Equity e) throws IOException {
+		String url = "http://query.yahooapis.com/v1/public/yql?q=select%20Ask%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22"+e.getTicker()+"%22)&env=store://datatables.org/alltableswithkeys";
+
+        // Create a URL and open a connection
+        URL YahooURL = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) YahooURL.openConnection();
+
+        // Set the HTTP Request type method to GET (Default: GET)
+        con.setRequestMethod("GET");
+        con.setConnectTimeout(10000);
+        con.setReadTimeout(10000);
+	
+        // Created a BufferedReader to read the contents of the request.
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        // MAKE SURE TO CLOSE YOUR CONNECTION!
+        in.close();
+        String responseString=response.toString();
+        String[] splitResponse= responseString.split("Ask");
+        String askValue=splitResponse[1];
+        askValue=askValue.replaceAll("/", "");
+        askValue=askValue.replaceAll("<", "");
+        askValue=askValue.replaceAll(">", "");
+        double value=Double.parseDouble(askValue);
+        e.setValue(value);
+        return e;
+	}
+}
