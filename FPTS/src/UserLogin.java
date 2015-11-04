@@ -64,6 +64,7 @@ public class UserLogin extends JFrame {
 	      }
 	    }
 	    
+            //Login Button is pressed, check to see if user exists.
 	    loginB.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e){
                     try {
@@ -86,7 +87,12 @@ public class UserLogin extends JFrame {
                         } 
         
                         if(userN.equals(usertxt) && userP.equals(userP)){
-                            EquityGUI u = new EquityGUI();
+                            //Create new User and new Portfolio
+                            User user = new User(userN, userP);
+                            Portfolio p = new Portfolio(user);
+                            user.addPortfolio(p);
+                            
+                            EquityGUI u = new EquityGUI(user);
                             u.setVisible( true );
                             dispose();
                         }

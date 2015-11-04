@@ -97,6 +97,7 @@ public class Login extends JFrame {
         filewrite.write(punamer+"\r\n" +ppaswder+ "\r\n");
         filewrite.close();
         JOptionPane.showMessageDialog(null,"Account has been created.");
+        UserLogin n = new UserLogin();
         dispose();
 
 
