@@ -48,6 +48,14 @@ public class Equity extends Holding{
 	public String getTicker(){
 		return this.tickerSymbol;
 	}
+        
+        public int getShares(){
+		return this.NumberOfShares;
+	}
+        
+        public void addShares(int x){
+		NumberOfShares = NumberOfShares + x;
+	}
 	
 	/**
 	 * A simple getter function

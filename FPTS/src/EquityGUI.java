@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +30,7 @@ public class EquityGUI extends JFrame {
         private	JTable		Atable;
 	private	JScrollPane AscrollPane;
         DefaultTableModel model;
+        DefaultTableModel Amodel;
         
         
         private User user;
@@ -42,11 +45,10 @@ public class EquityGUI extends JFrame {
 	public EquityGUI (User u, UserSystem uSys, TrackingSystem tSys, EquitySystem eSys, PortfolioSystem pSys)
 	{
                 user = u;
-                
                 currentPortfolio = getDummyPortfolio();
                 
                 Eqlist = getEquities(currentPortfolio);
-                AClist = this.getAccounts(currentPortfolio);
+                AClist = getAccounts(currentPortfolio);
                 
                 
 		setTitle( "Financial Tracking System" );
@@ -93,7 +95,7 @@ public class EquityGUI extends JFrame {
 
 		// Create a new table instance
 		Etable = new JTable( model );
-                Atable = new JTable( AccountDataValues, AccountColumn );
+                Atable = new JTable( Amodel );
                 
                 accountPanel = new JPanel();
                 accountPanel.setLayout(new BorderLayout());
@@ -141,13 +143,14 @@ public class EquityGUI extends JFrame {
         
         
     public ArrayList getEquities(Portfolio m){
-       ArrayList<Holding> Elist = new ArrayList<Holding>();
+       ArrayList<Equity> Elist = new ArrayList<Equity>();
        Portfolio p = m;
        ArrayList<Holding> hList = p.getHoldings();
        for(int i = 0; i<hList.size(); i++){
            Holding H = hList.get(i);
            if(H.isEquity() == true){
-               Elist.add(H);
+               Equity B = (Equity)H;
+               Elist.add(B);
            }           
        }
        
@@ -171,23 +174,57 @@ public class EquityGUI extends JFrame {
     
     public ArrayList<String> fillData(Holding m){
         String name = "";
-        
-        Double d = m.getValue();
-        String v = d.toString();
-        
-        String n = m.getName();
-        
-        char t = m.getType();
-        String type = Character.toString(t);
-        
         ArrayList<String> s = new ArrayList<String>();
-        s.add(type);
-        s.add(n);
-        s.add(v);
+        NumberFormat formatter = new DecimalFormat("#,###.00");
+        
+        if(m.getType() == 'E'){
+            Equity H = (Equity)m;
+            
+            
+            Double d = H.getTotalValue();
+            String v = d.toString();
+            v = formatter.format(d);
+        
+            String n = H.getName();
+            
+            int shares = H.getShares();
+            String num = Integer.toString(shares);
+
+            char t = H.getType();
+            String type = Character.toString(t);
+            s.add(n);
+            s.add(type);
+            s.add(num);
+            s.add(v);
+            
+        }
+        else{
+            
+            //value to a string
+            Double d = m.getValue();
+            String v = d.toString();
+            v = formatter.format(d);
+            
+            //name
+            String n = m.getName();
+            
+            //type to a string
+             char t = m.getType();
+            String type = Character.toString(t);
+            
+            // add them to array
+            s.add(n);
+            s.add(v);
+            System.out.println(t);
+            s.add(type);
+            
+        }
+        
         
         return s;
         
     }
+    
     
     private Portfolio getDummyPortfolio(){
 		
@@ -198,12 +235,25 @@ public class EquityGUI extends JFrame {
 		Equity C = new Equity("A3", 3, "A", "A", "A", "A");
 		Equity D = new Equity("A4", 4, "A", "A", "A", "A");
 		Equity E = new Equity("A5", 5, "A", "A", "A", "A");
+                CashAccount C1 = new CashAccount("C1",100000000,"1111-MM-DD");
+                CashAccount C2 = new CashAccount("C2",100000000,"1112-MM-DD");
+                CashAccount C3 = new CashAccount("C3",100000000,"1113-MM-DD");
+                CashAccount C4 = new CashAccount("C4",100000000,"1114-MM-DD");
+                
+                
+                
+                A.addShares(100);
+                A.addToValue(10);
 		
 		dummyPortfolio.addHoldings(A);
 		dummyPortfolio.addHoldings(B);
 		dummyPortfolio.addHoldings(C);
 		dummyPortfolio.addHoldings(D);
 		dummyPortfolio.addHoldings(E);
+                dummyPortfolio.addHoldings(C1);
+                dummyPortfolio.addHoldings(C2);
+                dummyPortfolio.addHoldings(C3);
+                dummyPortfolio.addHoldings(C4);
 		
 		return dummyPortfolio;
 		
@@ -212,17 +262,34 @@ public class EquityGUI extends JFrame {
     public void updateTable(){
         
         model = new DefaultTableModel(); 
-        model.addColumn("Type");
         model.addColumn("Ticker Symbol");
+        model.addColumn("Type");
         model.addColumn("Number of Shares");
+        model.addColumn("Value");
         
         for(int i = 0; i < Eqlist.size(); i++){
-                    Holding q = Eqlist.get(i);
+                    Equity q = (Equity) Eqlist.get(i);
                     ArrayList<String> p = fillData(q);
                     String a = p.get(0);
                     String b = p.get(1);
                     String c = p.get(2);
-                    model.addRow(new Object[]{a,b,c});
+                    String d = p.get(3);
+                    model.addRow(new Object[]{a,b,c,d});
+                }
+        
+        Amodel = new DefaultTableModel();
+        Amodel.addColumn("Name");
+        Amodel.addColumn("Value");
+        Amodel.addColumn("Type");
+        
+        for(int i = 0; i < AClist.size(); i++){
+                    Holding z = AClist.get(i);
+                    ArrayList<String> f = fillData(z);
+                    String a = f.get(0);
+                    String b = f.get(1);
+                    String c = f.get(2);
+                    Amodel.addRow(new Object[]{a,b});
                 }
     }
+     
 }
