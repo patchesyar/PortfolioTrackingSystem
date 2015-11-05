@@ -20,9 +20,11 @@ public class EquitySystem {
 	ArrayList<String> sector; //An array of known market sectors
 	
 	public EquitySystem(){
-		indices.add("DOW");
+            
+            indices = new ArrayList<String>();
+            sector = new ArrayList<String>();
+                indices.add("DOW");
 		indices.add("NASDAQ100");
-		
 		sector.add("TECHNOLOGY");
 		sector.add("FINANCE");
 		sector.add("TRANSPORTATION");

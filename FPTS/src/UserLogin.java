@@ -6,7 +6,11 @@ import java.util.*;
 
 
 public class UserLogin extends JFrame {
-
+        
+        UserSystem uSys;
+        TrackingSystem tSys;
+        EquitySystem eSys;
+        PortfolioSystem pSys;
 	JButton loginB;
         JButton createNew;
 	JPanel loginPanel;
@@ -20,7 +24,11 @@ public class UserLogin extends JFrame {
 	
 	public UserLogin(){
 		
-		
+            uSys = new UserSystem();
+            tSys = new TrackingSystem();
+            eSys = new EquitySystem();
+            pSys = new PortfolioSystem();
+            
             loginB = new JButton("Login");
             createNew = new JButton("Create New");
             loginPanel = new JPanel();
@@ -28,6 +36,10 @@ public class UserLogin extends JFrame {
 	    userPass = new JPasswordField(15);
 	    userLabel = new JLabel("Username");
 	    passLabel = new JLabel("Password");
+            
+            //import all equities into the system.
+            File eFile = new File("Equities.txt");
+            eSys.importEquity(tSys, eFile);
 	    
 	    setSize(300,200);
 	    setLocation(500,300);
@@ -92,7 +104,7 @@ public class UserLogin extends JFrame {
                             Portfolio p = new Portfolio(user);
                             user.addPortfolio(p);
                             
-                            EquityGUI u = new EquityGUI(user);
+                            EquityGUI u = new EquityGUI(user, uSys, tSys, eSys, pSys);
                             u.setVisible( true );
                             dispose();
                         }

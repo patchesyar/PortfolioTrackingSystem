@@ -16,7 +16,7 @@ public class SellView extends JFrame{
 	JTextField soldAmount; 
 	Portfolio currentPortfolio;
 	User currentUser = UserSystem.getActiveUser();
-	
+	ArrayList<Holding> Eqlist;
 	
 	
 	
@@ -41,7 +41,9 @@ public class SellView extends JFrame{
 	    
 	    sellButton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e){
-	    		
+                    Object H;
+                    Eqlist = currentPortfolio.getHoldings();
+                    
 	    		int amount;
 	    		
 	    		if (soldAmount.getText().equals("")){
@@ -50,6 +52,9 @@ public class SellView extends JFrame{
 	    			amount = Integer.parseInt(soldAmount.getText());
 	    		}
 	    		String ticker = dropDown.getSelectedItem().toString();
+                        H = dropDown.getSelectedItem();
+                        
+                        
 	    		System.out.println(ticker);
 	    	}
 	    });

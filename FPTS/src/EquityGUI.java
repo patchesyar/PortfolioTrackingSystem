@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,14 +39,14 @@ public class EquityGUI extends JFrame {
         ArrayList<Holding> AClist;
         Portfolio currentPortfolio;
         
-	public EquityGUI (User u)
+	public EquityGUI (User u, UserSystem uSys, TrackingSystem tSys, EquitySystem eSys, PortfolioSystem pSys)
 	{
                 user = u;
                 
                 currentPortfolio = getDummyPortfolio();
                 
-                Eqlist = getEquities(user.getPortfolios());
-                AClist = this.getAccounts(u);
+                Eqlist = getEquities(currentPortfolio);
+                AClist = this.getAccounts(currentPortfolio);
                 
                 
 		setTitle( "Financial Tracking System" );
@@ -72,20 +73,7 @@ public class EquityGUI extends JFrame {
                 buttonPanel.add(simulate);
                 buttonPanel.add(watchList);
                 
-                model = new DefaultTableModel(); 
-                model.addColumn("Type");
-                model.addColumn("Ticker Symbol");
-                model.addColumn("Number of Shares");
-                
-                for(int i = 0; i < Eqlist.size(); i++){
-                    Holding q = Eqlist.get(i);
-                    ArrayList<String> p = fillData(q);
-                    String a = p.get(0);
-                    String b = p.get(1);
-                    String c = p.get(2);
-                    model.addRow(new Object[]{a,b,c});
-                }
-                
+                updateTable();
                 
 		// Create columns names
 		//String columnNames[] = { "Type", "Ticker Symbol", "Number of Shares" };
@@ -134,6 +122,18 @@ public class EquityGUI extends JFrame {
 
                         }
                     });
+                
+                //open buy pane
+                buy.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        /*ArrayList<Equity> EList = tSys.getEquities();
+                        
+                        for(Equity E: EList){
+                            System.out.println(E.getName());
+                        }*/
+
+                        }
+                    });
     
     }
         
@@ -154,13 +154,13 @@ public class EquityGUI extends JFrame {
        return Elist;
     }
     
-    public ArrayList getAccounts(User u){
+    public ArrayList getAccounts(Portfolio m){
        ArrayList<Holding> Alist = new ArrayList<Holding>();
-       Portfolio p = u.getPortfolios();
+       Portfolio p = m;
        ArrayList<Holding> hList = p.getHoldings();
        
        for(Holding H : hList){
-           if(H.isEquity() == true){
+           if(H.isEquity() == false){
                Alist.add(H);
            }           
        }
@@ -208,4 +208,21 @@ public class EquityGUI extends JFrame {
 		return dummyPortfolio;
 		
 	}
+    
+    public void updateTable(){
+        
+        model = new DefaultTableModel(); 
+        model.addColumn("Type");
+        model.addColumn("Ticker Symbol");
+        model.addColumn("Number of Shares");
+        
+        for(int i = 0; i < Eqlist.size(); i++){
+                    Holding q = Eqlist.get(i);
+                    ArrayList<String> p = fillData(q);
+                    String a = p.get(0);
+                    String b = p.get(1);
+                    String c = p.get(2);
+                    model.addRow(new Object[]{a,b,c});
+                }
+    }
 }

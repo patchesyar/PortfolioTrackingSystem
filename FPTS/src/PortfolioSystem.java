@@ -29,6 +29,8 @@ public class PortfolioSystem {
 	ArrayList<String> sector; //An array of known market sectors
 	
 	public PortfolioSystem(){
+            indices = new ArrayList<String>();
+            sector = new ArrayList<String>();
 		indices.add("DOW");
 		indices.add("NASDAQ100");
 		
