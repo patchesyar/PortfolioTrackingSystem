@@ -41,11 +41,20 @@ public class Portfolio {
 		this.log.addLog(hObj.log());
 		totalValue += hObj.getValue();
 	}
+        
+        public void setList(ArrayList<Holding> h){
+            this.hList = h;
+	}
 
-        public void sellEquity(Equity eObj, int shares){
+        public ArrayList<Holding> sellEquity(Equity eObj, int shares){
             int count = 0;
-            for(Holding H : hList){
-                if(H.getName().equals(eObj.getName())){
+            int index=0;
+            int save = 0;
+            for(int i =0; i<this.hList.size(); i++){
+                Holding placeHolder = this.hList.get(i);
+                index = i;
+                if(placeHolder.getName().equals(eObj.getName())){
+                    save = i;
                 count = eObj.getShares();
                     if(shares>count){
                         System.out.println("not enough shares");
@@ -55,12 +64,16 @@ public class Portfolio {
                         totalValue += num;
                         eObj.loseShares(shares);
                         }
-                    if(eObj.getShares() == 0){
-                        hList.remove(H);
-                    }
                         this.log.addLog(eObj.log());
                     }
                 }
+            if(eObj.getShares() == 0){
+                        this.hList.remove(save);
+                    }
+            for (Holding h : hList){
+                                System.out.println(h.getName());
+                        }
+            return this.hList;
 	}
 
 

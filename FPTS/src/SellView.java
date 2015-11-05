@@ -20,14 +20,16 @@ public class SellView extends JFrame{
 	
 	
 	
-	public SellView(User u){
+	public SellView(User u, UserSystem uSys, TrackingSystem tSys, EquitySystem eSys, PortfolioSystem pSys){
 		
-            //currentUser = u;
-		if (currentUser == null){
+            currentUser = u;
+            currentPortfolio = getDummyPortfolio();
+            Eqlist = currentPortfolio.getHoldings();
+		/*if (currentUser == null){
 			currentPortfolio = getDummyPortfolio();
 		} else {
 			currentPortfolio = currentUser.getPortfolios();
-		}
+		}*/
 		
 		sellButton = new JButton("Sell");
 	    transactionPanel = new JPanel();
@@ -41,9 +43,8 @@ public class SellView extends JFrame{
 	    
 	    sellButton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e){
-                    Object H;
-                    Eqlist = currentPortfolio.getHoldings();
-                    
+                    Equity E = new Equity("A1", 1, "A", "A", "A", "A");
+                    int index = 0;
 	    		int amount;
 	    		
 	    		if (soldAmount.getText().equals("")){
@@ -52,12 +53,23 @@ public class SellView extends JFrame{
 	    			amount = Integer.parseInt(soldAmount.getText());
 	    		}
 	    		String ticker = dropDown.getSelectedItem().toString();
-                        H = dropDown.getSelectedItem();
+                        for(int i =0; i<Eqlist.size(); i++){
+                            Holding placeHolder = Eqlist.get(i);
+                            index = i;
+                            if(placeHolder.getName().equals(ticker)){
+                                E = (Equity)placeHolder;
+                            }
+                        }
+                        Eqlist = currentPortfolio.sellEquity(E, amount);
                         
+                        currentPortfolio.setList(Eqlist);
+                        currentUser.setPortfolio(currentPortfolio);
                         
-	    		System.out.println(ticker);
+                        EquityGUI GUI = new EquityGUI(currentUser,uSys,tSys,eSys,pSys);
+                        GUI.setVisible( true );
                         dispose();
 	    	}
+                
 	    });
 	    
 	    
@@ -89,9 +101,9 @@ public class SellView extends JFrame{
 	    
 	    
 	    setJFrame();
+
 	    
-	    
-	    
+
 	}
 	
 	private void setJFrame(){

@@ -34,6 +34,7 @@ public class EquityGUI extends JFrame {
         
         
         private User user;
+        JButton update;
         JButton buy;
         JButton sell;
         JButton simulate;
@@ -45,8 +46,7 @@ public class EquityGUI extends JFrame {
 	public EquityGUI (User u, UserSystem uSys, TrackingSystem tSys, EquitySystem eSys, PortfolioSystem pSys)
 	{
                 user = u;
-                currentPortfolio = getDummyPortfolio();
-                
+                currentPortfolio = u.getPortfolios();
                 Eqlist = getEquities(currentPortfolio);
                 AClist = getAccounts(currentPortfolio);
                 
@@ -60,6 +60,7 @@ public class EquityGUI extends JFrame {
                 sell = new JButton("Sell Equity");
                 simulate = new JButton("Simulate");
                 watchList = new JButton("My Watchlist");
+                update = new JButton("Update");
 
 		// Create a panel to hold all other components
 		topPanel = new JPanel();
@@ -74,6 +75,7 @@ public class EquityGUI extends JFrame {
                 buttonPanel.add(sell);
                 buttonPanel.add(simulate);
                 buttonPanel.add(watchList);
+                buttonPanel.add(update);
                 
                 updateTable();
                 
@@ -119,8 +121,16 @@ public class EquityGUI extends JFrame {
                //open sell pane
                 sell.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
-                        SellView s = new SellView(user);
+                        SellView s = new SellView(user,uSys,tSys,eSys,pSys);
                         s.setVisible( true );
+                        dispose();
+
+                        }
+                    });
+                
+                update.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        updateTable();
 
                         }
                     });

@@ -42,6 +42,10 @@ public class User {
 	public void addPortfolio(Portfolio pObj){
 		porto = pObj;
 	}
+        
+        public void setPortfolio(Portfolio pObj){
+		this.porto = pObj;
+	}
 	
 	/**
 	 * A method for validating an input as the given user password
