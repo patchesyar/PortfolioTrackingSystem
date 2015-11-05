@@ -16,6 +16,10 @@ public class TrackingSystem {
 	private ArrayList<Equity> eList;
 	
 	public TrackingSystem(){
+            
+            eList = new ArrayList<Equity>();
+            pList = new ArrayList<Portfolio>();
+            uList = new ArrayList<User>();
 		
 	}
 	

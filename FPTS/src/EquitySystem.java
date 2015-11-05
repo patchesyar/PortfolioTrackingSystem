@@ -52,25 +52,22 @@ public class EquitySystem {
             while ((line = fileReader.readLine()) != null)
             {
                 //Get all tokens available in line
-                String[] tokens = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                tokens[0] = tokens[0].substring(1, tokens.length - 1);
+                String[] tokens = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+                tokens[0] = tokens[0].substring(1, tokens[0].length() - 1);
                 tick = tokens[0];
-                
-                tokens[1] = tokens[1].substring(1, tokens.length - 1);
+                tokens[1] = tokens[1].substring(1, tokens[1].length() - 1);
                 n = tokens[1];
-                
-                tokens[2] = tokens[2].substring(1, tokens.length - 1);
+                tokens[2] = tokens[2].substring(1, tokens[2].length() - 1);
                 v = Double.parseDouble(tokens[2]);
-                
-                tokens[3] = tokens[3].substring(1, tokens.length - 1);
+                tokens[3] = tokens[3].substring(1, tokens[3].length()- 1);
                 if(indices.contains(tokens[3])){
                 	mark = tokens[3];
                 }
                 if(sector.contains(tokens[3])){
                 	ind = tokens[3];
                 }
-                if(tokens[4] != null){
-                	 tokens[4] = tokens[4].substring(1, tokens.length - 1);
+                if(tokens.length == 5){
+                    tokens[4] = tokens[4].substring(1, tokens[4].length() - 1);
                 	if(indices.contains(tokens[4])){
                     	mark = tokens[4];
                     }
@@ -78,6 +75,7 @@ public class EquitySystem {
                     	ind = tokens[4];
                     }
                 }
+                
                 Equity e = new Equity(n, v, tick, mark, ind, type);
                 tSys.addEquity(e);
                 
