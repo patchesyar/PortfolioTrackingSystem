@@ -138,11 +138,9 @@ public class EquityGUI extends JFrame {
                 //open buy pane
                 buy.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
-                        /*ArrayList<Equity> EList = tSys.getEquities();
-                        
-                        for(Equity E: EList){
-                            System.out.println(E.getName());
-                        }*/
+                       BuyView s = new BuyView(user,uSys,tSys,eSys,pSys);
+                       s.setVisible( true );
+                       dispose();
 
                         }
                     });
