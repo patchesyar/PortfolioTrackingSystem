@@ -20,8 +20,9 @@ public class SellView extends JFrame{
 	
 	
 	
-	public SellView(){
+	public SellView(User u){
 		
+            currentUser = u;
 		if (currentUser == null){
 			currentPortfolio = getDummyPortfolio();
 		} else {
@@ -89,7 +90,7 @@ public class SellView extends JFrame{
 	
 	private void setJFrame(){
 		this.setSize(300,200);
-		this.setLocation(500,300);
+		this.setLocation(800,500);
 	    this.getContentPane().add(transactionPanel);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setVisible(true);
