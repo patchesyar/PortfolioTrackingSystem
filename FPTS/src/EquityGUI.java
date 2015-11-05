@@ -35,6 +35,7 @@ public class EquityGUI extends JFrame {
         
         private User user;
         //JButton update;
+        JButton banks;
         JButton buy;
         JButton sell;
         JButton simulate;
@@ -58,6 +59,7 @@ public class EquityGUI extends JFrame {
 		setBackground( Color.gray );
                 buy = new JButton("Buy Equity");
                 sell = new JButton("Sell Equity");
+                banks = new JButton("Add Accounts");
                 simulate = new JButton("Simulate");
                 watchList = new JButton("My Watchlist");
                 //update = new JButton("Update");
@@ -73,6 +75,7 @@ public class EquityGUI extends JFrame {
                 buttonPanel.setLayout(new FlowLayout());
                 buttonPanel.add(buy);
                 buttonPanel.add(sell);
+                buttonPanel.add(banks);
                 buttonPanel.add(simulate);
                 buttonPanel.add(watchList);
                // buttonPanel.add(update);
@@ -128,13 +131,13 @@ public class EquityGUI extends JFrame {
                         }
                     });
                 
-                /*update.addActionListener(new ActionListener(){
+                banks.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
-                        updateTable();
-
+                     
+                        
                         }
-                    });*/
-                
+                    });
+               
                 //open buy pane
                 buy.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e) {

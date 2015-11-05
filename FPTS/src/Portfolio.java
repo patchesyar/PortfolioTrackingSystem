@@ -138,9 +138,10 @@ public class Portfolio {
 		}
 		//By this point, you have a bank account with enough funds.
 		bankAccount.takeFromValue(total) ;
-		for(int x=0; x<amount; x++){
-			this.addHoldings(e) ;
-		}
+                String t = "E";
+		Equity created = new Equity(e.getName(),e.getValue(), e.getTicker(), e.getIndex(), e.getSector(), t);
+                created.addShares(amount);
+                this.addHoldings(created);
 		this.updateTotalValue() ;
 
 	}

@@ -54,7 +54,11 @@ public class BuyView extends JFrame{
 	
 	
 	public BuyView(User u, UserSystem uSys, TrackingSystem tSys, EquitySystem eSys, PortfolioSystem pSys){
-		
+            
+            
+            currentUser = u;
+            currentPortfolio = u.getPortfolios();
+            
             setTitle( "Financial Tracking System" );
             setSize( 800, 300 );
             setLocation(400,180);
@@ -111,31 +115,33 @@ public class BuyView extends JFrame{
                 
 	    buyButton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e){
-                    Equity E = new Equity("A1", 1, "A", "A", "A", "A");
-                    int index = 0;
-	    		int amount;
-	    		
-	    		if (soldAmount.getText().equals("")){
-	    			amount = 0;
-	    		} else {
-	    			amount = Integer.parseInt(soldAmount.getText());
-	    		}
-	    		String ticker = dropDown.getSelectedItem().toString();
-                        for(int i =0; i<Eqlist.size(); i++){
-                            Holding placeHolder = Eqlist.get(i);
-                            index = i;
-                            if(placeHolder.getName().equals(ticker)){
-                                E = (Equity)placeHolder;
+                    
+                //get text within textfields
+                    String buyText = eName.getText();
+                    String NumberofShares = ePrice.getText();
+                    
+                    if(buyText.equals("") || NumberofShares.equals("")){
+                        JOptionPane.showMessageDialog(null,"Please fill out both fields");
+                    }
+                    else{
+                        try{
+                            Integer.parseInt(NumberofShares);
+                            int i = Integer.parseInt(NumberofShares);
+                            if (checkEquity(buyText) == true){
+                                currentPortfolio.buyEquity(tSys, buyText, i);
+                                //Equity purchased = findEquity(buyText);
                             }
+                            currentUser.setPortfolio(currentPortfolio);
+                            EquityGUI GUI = new EquityGUI(currentUser,uSys,tSys,eSys,pSys);
+                            GUI.setVisible( true );
+                            dispose();
+                            
+
+                        }catch(NumberFormatException d) {
+                            JOptionPane.showMessageDialog(null,"Please Enter Number for Shares");
                         }
-                        //Eqlist = currentPortfolio.sellEquity(E, amount);
-                        
-                        //currentPortfolio.setList(Eqlist);
-                        currentUser.setPortfolio(currentPortfolio);
-                        
-                        EquityGUI GUI = new EquityGUI(currentUser,uSys,tSys,eSys,pSys);
-                        GUI.setVisible( true );
-                        dispose();
+
+                    }
 	    	}
                 
 	    });
@@ -208,4 +214,43 @@ public class BuyView extends JFrame{
                 }
             
         }
+        
+        public boolean checkEquity(String s){
+            boolean check = false;
+            for(Equity e : Eqlist){
+                if(e.getTicker().equals(s)){
+                    check = true;
+                }
+            }
+            return check;
+        }
+        
+        public Equity findEquity(String s){
+            Equity e = null;
+            for(Equity f : Eqlist){
+                if(f.getTicker().equals(s)){
+                    e = f;
+                }
+            }
+            return e;
+        }
+        
+        private Portfolio getDummyPortfolio(){
+		
+		User dummyUser = new User("Adrian", "Password");
+		Portfolio dummyPortfolio = new Portfolio(dummyUser);
+                BankAccount C1 = new BankAccount("C1",100000000,"1111-MM-DD");
+                BankAccount C2 = new BankAccount("C2",100000000,"1112-MM-DD");
+                BankAccount C3 = new BankAccount("C3",100000000,"1113-MM-DD");
+                BankAccount C4 = new BankAccount("C4",100000000,"1114-MM-DD");
+                
+                
+                dummyPortfolio.addHoldings(C1);
+                dummyPortfolio.addHoldings(C2);
+                dummyPortfolio.addHoldings(C3);
+                dummyPortfolio.addHoldings(C4);
+		
+		return dummyPortfolio;
+		
+	}
 }
