@@ -52,7 +52,7 @@ public class EquitySystem {
             while ((line = fileReader.readLine()) != null)
             {
                 //Get all tokens available in line
-                String[] tokens = line.split(DELIMITER);
+                String[] tokens = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 tokens[0] = tokens[0].substring(1, tokens.length - 1);
                 tick = tokens[0];
                 

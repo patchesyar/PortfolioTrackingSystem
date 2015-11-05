@@ -56,6 +56,10 @@ public class Equity extends Holding{
         public void addShares(int x){
 		NumberOfShares = NumberOfShares + x;
 	}
+        
+        public void loseShares(int x){
+		NumberOfShares = NumberOfShares - x;
+	}
 	
 	/**
 	 * A simple getter function

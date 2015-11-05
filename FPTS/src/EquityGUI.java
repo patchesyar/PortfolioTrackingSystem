@@ -280,14 +280,14 @@ public class EquityGUI extends JFrame {
         Amodel = new DefaultTableModel();
         Amodel.addColumn("Name");
         Amodel.addColumn("Value");
-        Amodel.addColumn("Type");
+        //Amodel.addColumn("Type");
         
         for(int i = 0; i < AClist.size(); i++){
                     Holding z = AClist.get(i);
                     ArrayList<String> f = fillData(z);
                     String a = f.get(0);
                     String b = f.get(1);
-                    String c = f.get(2);
+                    //String c = f.get(2);
                     Amodel.addRow(new Object[]{a,b});
                 }
     }
